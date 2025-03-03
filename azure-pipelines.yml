@@ -35,7 +35,7 @@ steps:
     token: $(PACT_BROKER_TOKEN)
     contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
     contract_content_type: application/yaml # optional, defaults to application/yml
-    verification_results: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/report.txt
+    verification_results: example-bi-directional-provider-dotnet/report.txt
     verifier: schemathesis
 - ${{ if eq(variables['Agent.JobStatus'], 'Failed') }}:
   - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
@@ -44,7 +44,7 @@ steps:
       token: $(PACT_BROKER_TOKEN)
       contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
       contract_content_type: application/yaml # optional, defaults to application/yml
-      verification_results: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/report.txt
+      verification_results: example-bi-directional-provider-dotnet/report.txt
       verifier: schemathesis
       verification_exit_code: 1 # defaults to 0 (success)
 
