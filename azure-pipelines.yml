@@ -20,7 +20,7 @@ variables:
   - name: contract
     value: "example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json"
   - name: contract_content_type
-    value: "application/yaml" # optional, defaults to application/yml
+    value: "application/json" # optional, defaults to application/yml
   - name: verification_results
     value: "example-bi-directional-provider-dotnet/report.txt"
   - name: verifier
