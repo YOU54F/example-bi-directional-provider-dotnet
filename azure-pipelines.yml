@@ -17,8 +17,8 @@ variables:
   - name: PACT_BROKER_BASE_URL
     value: https://testdemo.pactflow.io
   - template: templates/azure_pact_variables.yml@pact_templates
-  - name: contract
-    value: "example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json"
+  # - name: contract
+    # value: "example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json"
   - name: contract_content_type
     value: "application/json" # optional, defaults to application/yml
   - name: verification_results
@@ -41,7 +41,7 @@ steps:
   parameters:
     # application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
     token: $(PACT_BROKER_TOKEN)
-    # contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
+    contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
     # contract_content_type: application/yaml # optional, defaults to application/yml
     # verification_results: example-bi-directional-provider-dotnet/report.txt
     # verifier: schemathesis
@@ -50,7 +50,7 @@ steps:
     parameters:
       # application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
       token: $(PACT_BROKER_TOKEN)
-      # contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
+      contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
       # contract_content_type: application/yaml # optional, defaults to application/yml
       # verification_results: example-bi-directional-provider-dotnet/report.txt
       # verifier: schemathesis
