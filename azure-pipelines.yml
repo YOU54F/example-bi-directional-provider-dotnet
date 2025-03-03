@@ -1,0 +1,58 @@
+# PactFlow Bi-Directional Provider Worfklow
+
+pool:
+  vmImage: ubuntu-latest
+
+resources:
+  repositories:
+    - repository: pact_templates
+      type: github
+      name: you54f/azure-pipelines-templates
+      endpoint: azure-templates-pact-github # azure service connection to allow read-only access to github repo
+      # ref: refs/heads/templates # point to a commit / branch / tag
+
+variables:
+  - name: PACTICIPANT
+    value: "pactflow-example-bi-directional-provider-dotnet"
+  - name: PACT_BROKER_BASE_URL
+    value: https://testdemo.pactflow.io
+  - template: templates/azure_pact_variables.yml@pact_templates
+
+steps:
+- checkout: self
+- script: |
+    dotnet test tests
+  displayName: ✅  Test
+  workingDirectory: pactflow-example-bi-directional-provider-dotnet
+- template: templates/azure_publish_provider_contract.yml@pact_templates
+  parameters:
+    application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
+    token: $(PACT_BROKER_TOKEN)
+    tag: prod
+    version: "1.2.3" # autodetected if not provided
+    contract: pactflow-example-bi-directional-provider-dotnet/src/oas/user.yml
+    contract_content_type: application/yaml # optional, defaults to application/yml
+    verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
+- ${{ if failed() }}:
+  - template: templates/azure_publish_provider_contract.yml@pact_templates
+    parameters:
+      application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
+      token: $(PACT_BROKER_TOKEN)
+      contract: pactflow-example-bi-directional-provider-dotnet/src/oas/user.yml
+      contract_content_type: application/yaml # optional, defaults to application/yml
+      verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
+      verification_exit_code: 1 # defaults to 0 (success)
+
+- template: templates/azure_pact_can_i_deploy.yml@pact_templates
+  parameters:
+    to_environment: production
+    application_name: $(PACTICIPANT)
+    token: $(PACT_BROKER_TOKEN)
+    retry_while_unknown: 5
+    retry_interval: 10
+- ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+  - template: templates/azure_pact_record_deployment.yml@pact_templates
+    parameters:
+      environment: production
+      application_name: $(PACTICIPANT)
+      token: $(PACT_BROKER_TOKEN)
