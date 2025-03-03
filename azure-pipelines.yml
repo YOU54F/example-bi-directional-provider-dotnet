@@ -17,8 +17,8 @@ variables:
   - name: PACT_BROKER_BASE_URL
     value: https://testdemo.pactflow.io
   - template: templates/azure_pact_variables.yml@pact_templates
-  # - name: contract
-    # value: "example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json"
+  - name: contract
+    value: "example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json"
   - name: contract_content_type
     value: "application/json" # optional, defaults to application/yml
   - name: verification_results
@@ -31,6 +31,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     version: '8.0.406'
+- script: printenv
 - script: make publish_dll
   displayName: ✅  Generate OpenAPI with SwashBuckle
   workingDirectory: example-bi-directional-provider-dotnet
