@@ -33,7 +33,7 @@ steps:
     contract: pactflow-example-bi-directional-provider-dotnet/src/oas/user.yml
     contract_content_type: application/yaml # optional, defaults to application/yml
     verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
-- ${{ if eq(failed(), 'true') }}:
+- ${{ if eq(variables['Agent.JobStatus'], 'Failed') }}:
   - template: templates/azure_publish_provider_contract.yml@pact_templates
     parameters:
       application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
