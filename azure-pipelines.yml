@@ -13,7 +13,7 @@ resources:
 
 variables:
   - name: application_name
-    value: "pactflow-example-bi-directional-provider-dotnet"
+    value: pactflow-example-bi-directional-provider-dotnet
   - name: PACT_BROKER_BASE_URL
     value: https://testdemo.pactflow.io
   - template: templates/azure_pact_variables.yml@pact_templates
