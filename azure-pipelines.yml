@@ -41,7 +41,7 @@ steps:
   parameters:
     # application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
     token: $(PACT_BROKER_TOKEN)
-    contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
+    # contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
     # contract_content_type: application/yaml # optional, defaults to application/yml
     # verification_results: example-bi-directional-provider-dotnet/report.txt
     # verifier: schemathesis
@@ -50,7 +50,7 @@ steps:
     parameters:
       # application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
       token: $(PACT_BROKER_TOKEN)
-      contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
+      # contract: example-bi-directional-provider-dotnet/example-bi-directional-provider-dotnet/swagger.json
       # contract_content_type: application/yaml # optional, defaults to application/yml
       # verification_results: example-bi-directional-provider-dotnet/report.txt
       # verifier: schemathesis
