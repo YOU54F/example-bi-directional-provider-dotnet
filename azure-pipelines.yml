@@ -31,7 +31,6 @@ steps:
 - task: UseDotNet@2
   inputs:
     version: '8.0.406'
-- script: printenv
 - script: make publish_dll
   displayName: ✅  Generate OpenAPI with SwashBuckle
   workingDirectory: example-bi-directional-provider-dotnet
