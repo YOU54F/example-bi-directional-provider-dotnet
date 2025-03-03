@@ -20,10 +20,13 @@ variables:
 
 steps:
 - checkout: self
-- script: |
-    pwd
-    ls
-    dotnet test tests
+- task: UseDotNet@2
+  inputs:
+    version: '8.0.406'
+- script: make publish_dll
+  displayName: ✅  Generate OpenAPI with SwashBuckle
+  workingDirectory: example-bi-directional-provider-dotnet
+- script: make test
   displayName: ✅  Test
   workingDirectory: example-bi-directional-provider-dotnet
 - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
