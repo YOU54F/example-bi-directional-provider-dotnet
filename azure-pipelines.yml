@@ -21,9 +21,11 @@ variables:
 steps:
 - checkout: self
 - script: |
+    pwd
+    ls
     dotnet test tests
   displayName: ✅  Test
-  workingDirectory: pactflow-example-bi-directional-provider-dotnet
+  # workingDirectory: pactflow-example-bi-directional-provider-dotnet
 - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
   parameters:
     application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
