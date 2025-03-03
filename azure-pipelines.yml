@@ -25,24 +25,24 @@ steps:
     ls
     dotnet test tests
   displayName: ✅  Test
-  # workingDirectory: pactflow-example-bi-directional-provider-dotnet
+  workingDirectory: example-bi-directional-provider-dotnet
 - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
   parameters:
     application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
     token: $(PACT_BROKER_TOKEN)
     tag: prod
     version: "1.2.3" # autodetected if not provided
-    contract: pactflow-example-bi-directional-provider-dotnet/src/oas/user.yml
+    contract: example-bi-directional-provider-dotnet/src/oas/user.yml
     contract_content_type: application/yaml # optional, defaults to application/yml
-    verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
+    verification_results: example-bi-directional-provider-dotnet/src/results/report.md
 - ${{ if eq(variables['Agent.JobStatus'], 'Failed') }}:
   - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
     parameters:
       application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
       token: $(PACT_BROKER_TOKEN)
-      contract: pactflow-example-bi-directional-provider-dotnet/src/oas/user.yml
+      contract: example-bi-directional-provider-dotnet/src/oas/user.yml
       contract_content_type: application/yaml # optional, defaults to application/yml
-      verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
+      verification_results: example-bi-directional-provider-dotnet/src/results/report.md
       verification_exit_code: 1 # defaults to 0 (success)
 
 - template: templates/azure_pact_can_i_deploy.yml@pact_templates
