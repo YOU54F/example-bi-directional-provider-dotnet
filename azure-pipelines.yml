@@ -24,7 +24,7 @@ steps:
     dotnet test tests
   displayName: ✅  Test
   workingDirectory: pactflow-example-bi-directional-provider-dotnet
-- template: templates/azure_pact_publish_provider_contract@pact_templates
+- template: templates/azure_pact_publish_provider_contract.yml@pact_templates
   parameters:
     application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
     token: $(PACT_BROKER_TOKEN)
@@ -34,7 +34,7 @@ steps:
     contract_content_type: application/yaml # optional, defaults to application/yml
     verification_results: pactflow-example-bi-directional-provider-dotnet/src/results/report.md
 - ${{ if eq(variables['Agent.JobStatus'], 'Failed') }}:
-  - template: templates/azure_pact_publish_provider_contract@pact_templates
+  - template: templates/azure_pact_publish_provider_contract.yml@pact_templates
     parameters:
       application_name: $(PACTICIPANT) # The pacticipant name of which the branch belongs to
       token: $(PACT_BROKER_TOKEN)
